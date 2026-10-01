@@ -1,0 +1,38 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Temporary test screenshots
+proof_*.png
+current_*.png
+dark_*.png
+example_*.png
+mobile_*.png
+neobrutalism_*.png
+reference_*.png
+section_*.png
+cheatsheet_*.png
+command_*.png
+exam_*.png
+notes_*.png

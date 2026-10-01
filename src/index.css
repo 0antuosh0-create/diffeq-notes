@@ -1,0 +1,290 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Vazirmatn", system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif;
+
+  --color-paper: var(--bg);
+  --color-card: var(--card);
+  --color-card2: var(--card2);
+  --color-ink: var(--ink);
+  --color-soft: var(--soft);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
+  --color-line-soft: var(--line-soft);
+  --color-accent: var(--accent);
+  --color-gold: var(--gold);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Light: warm paper (unchanged identity, contrast tuned)             */
+/* ------------------------------------------------------------------ */
+:root {
+  --bg: #f7f5ee;
+  --card: #ffffff;
+  --card2: #efe9da;
+  --ink: #111110;
+  --soft: #38342c;
+  --faint: #666052;
+  --line: #111110;
+  --line-soft: #ddd4be;
+  --accent: #0f766e;
+  --gold: #d97706;
+  --math: #111110;
+  --grid-dot: rgba(17, 17, 16, 0.08);
+  --grid-line: rgba(17, 17, 16, 0.035);
+  --glow-a: rgba(15, 118, 110, 0.12);
+  --glow-b: rgba(217, 119, 6, 0.08);
+  --glow-c: rgba(99, 102, 241, 0.05);
+
+  /* Tactile Modern Neobrutalist Shadows */
+  --shadow-xs: 1.5px 1.5px 0px #111110;
+  --shadow-sm: 2.5px 2.5px 0px #111110;
+  --shadow-md: 3.5px 3.5px 0px #111110;
+  --shadow-lg: 5px 5px 0px #111110;
+
+  --shadow-1: var(--shadow-md);
+  --shadow-2: var(--shadow-lg);
+  --shadow-sm-val: var(--shadow-sm);
+  color-scheme: light;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Dark: High-contrast rich charcoal, luminous accent & clear text    */
+/* ------------------------------------------------------------------ */
+.dark {
+  --bg: #0a0c10;
+  --card: #12151d;
+  --card2: #1a1e29;
+  --ink: #f8fafc;
+  --soft: #cbd5e1;
+  --faint: #94a3b8;
+  --line: #2e3646;
+  --line-soft: #1e2430;
+  --accent: #2dd4bf;
+  --gold: #fbbf24;
+  --math: #ffffff;
+  --grid-dot: rgba(45, 212, 191, 0.08);
+  --grid-line: rgba(255, 255, 255, 0.025);
+  --glow-a: rgba(45, 212, 191, 0.14);
+  --glow-b: rgba(251, 191, 36, 0.08);
+  --glow-c: rgba(139, 92, 246, 0.06);
+
+  /* Luminous Dark Neobrutalist Depth: Solid Block + Lit Edge */
+  --shadow-xs: 1.5px 1.5px 0px #000000, 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --shadow-sm: 2.5px 2.5px 0px #000000, 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --shadow-md: 3.5px 3.5px 0px #000000, 0 0 0 1px rgba(255, 255, 255, 0.1);
+  --shadow-lg: 5px 5px 0px #000000, 0 0 0 1px rgba(45, 212, 191, 0.4);
+
+  --shadow-1: var(--shadow-md);
+  --shadow-2: var(--shadow-lg);
+  --shadow-sm-val: var(--shadow-sm);
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-feature-settings: "cv01", "ss01", "ss02";
+  overflow-x: clip;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg);
+  color: var(--ink);
+  overflow-x: clip;
+  position: relative;
+  background-image:
+    /* Luminous top-right ethereal glow */
+    radial-gradient(65rem 38rem at 85% -5%, var(--glow-a), transparent 60%),
+    /* Warm amber atmospheric aura on left */
+    radial-gradient(55rem 32rem at 10% 25%, var(--glow-b), transparent 55%),
+    /* Subtle violet deep vignette at bottom */
+    radial-gradient(60rem 40rem at 50% 105%, var(--glow-c), transparent 65%),
+    /* Fine engineered math micro-dot matrix */
+    radial-gradient(circle, var(--grid-dot) 1.25px, transparent 1.25px),
+    /* Structural blueprint macro grid lines */
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 24px 24px, 120px 120px, 120px 120px;
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 32%, transparent);
+}
+
+/* ---------- Interaction states (global, both themes) ---------- */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+button:disabled,
+button[aria-disabled="true"] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- Scrollbars ---------- */
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--faint) 40%, transparent);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--accent) 65%, transparent);
+  background-clip: padding-box;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--faint) 55%, transparent);
+  background-clip: padding-box;
+}
+
+/* ---------- KaTeX in RTL and Persian context ---------- */
+.math-inline {
+  direction: ltr !important;
+  unicode-bidi: isolate;
+  display: inline-block;
+  vertical-align: -0.16em;
+  margin: 0 0.18rem;
+  line-height: 1;
+  max-width: 100%;
+}
+.math-inline .katex {
+  font-size: 1.05em;
+  line-height: 1;
+}
+.math-block {
+  direction: ltr !important;
+  text-align: center;
+  margin: 0.25rem 0;
+  padding: 0.25rem 0;
+}
+.math-block .katex-display {
+  margin: 0.35rem 0;
+}
+.math-block .katex {
+  font-size: 1.15em;
+}
+.katex {
+  font-size: 1.05em;
+  text-rendering: auto;
+  color: var(--math);
+}
+.katex .mtext,
+.katex .text,
+.katex .katex-text {
+  font-family: var(--font-sans) !important;
+  font-weight: 500;
+}
+.katex-html {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+  padding-bottom: 2px;
+  scrollbar-width: thin;
+}
+
+/* ---------- Consistent Interaction & Animation System ---------- */
+.card-shadow {
+  box-shadow: var(--shadow-md);
+}
+.dark .card-shadow {
+  box-shadow: var(--shadow-md);
+}
+
+.neo-card {
+  border: 2px solid var(--line);
+  box-shadow: var(--shadow-md);
+  transition: transform 0.16s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.16s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.16s ease;
+}
+.neo-card:hover {
+  transform: translate(-1.5px, -1.5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.neo-btn {
+  border: 2px solid var(--line);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.14s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.14s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.14s ease,
+              border-color 0.14s ease,
+              color 0.14s ease;
+}
+.neo-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: var(--shadow-md);
+}
+.neo-btn:active {
+  transform: translate(1.5px, 1.5px);
+  box-shadow: none;
+}
+.scroll-mt-header {
+  scroll-margin-top: 7rem;
+}
+
+.glass-panel {
+  background: color-mix(in srgb, var(--card) 88%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--line);
+}
+
+@keyframes floaty {
+  0%, 100% { transform: translate3d(0, 0px, 0) rotate(0deg); }
+  50% { transform: translate3d(0, -8px, 0) rotate(1deg); }
+}
+.floaty {
+  animation: floaty 10s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translate3d(0, 10px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+.fade-up {
+  animation: fadeUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: white !important; color: black !important; background-image: none !important; }
+  .card-shadow { box-shadow: none !important; border: 1px solid #ddd !important; }
+  aside, header, footer { display: none !important; }
+  main { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
+  .katex { color: black !important; }
+}
